@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 · 课件</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<script>
+(function () {
+  try {
+    var mode = localStorage.getItem('theme') || 'system';
+    var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<main class="page">
+  <h1>404</h1>
+  <p class="prose">页面不存在。</p>
+  <p><a href="/">← 返回首页</a></p>
+</main>
+</body>
+</html>

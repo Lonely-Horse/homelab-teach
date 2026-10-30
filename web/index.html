@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>课件</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<script>
+(function () {
+  try {
+    var mode = localStorage.getItem('theme') || 'system';
+    var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    document.documentElement.dataset.themeMode = mode;
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <nav>
+    <a href="#/" data-nav="home">首页</a>
+    <a href="#/course" data-nav="course">课件</a>
+    <a href="#/about" data-nav="about">个人</a>
+    <a href="https://blog.example.com" target="_blank" rel="noopener">博客↗</a>
+  </nav>
+  <div class="spacer"></div>
+  <div class="search-wrap">
+    <input id="searchInput" type="search" placeholder="搜索课件…" autocomplete="off" aria-label="搜索课件">
+    <div id="searchResults" class="search-results" hidden></div>
+  </div>
+  <button id="themeBtn" class="icon-btn" type="button" title="切换主题" aria-label="切换主题">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <circle cx="12" cy="12" r="8"></circle>
+      <path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor" stroke="none"></path>
+    </svg>
+  </button>
+  <a class="icon-btn" href="/admin/" aria-label="管理" title="管理">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <circle cx="12" cy="12" r="3.2"></circle>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.14.38.36.72.64 1 .28.27.62.45 1 .51H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51.49z"></path>
+    </svg>
+  </a>
+</header>
+
+<main id="homeView" class="page">
+  <h1 id="siteTitle"></h1>
+  <div id="siteBody" class="prose"></div>
+</main>
+
+<div id="courseView" hidden>
+  <div class="coursebar">
+    <button id="drawerBtn" class="icon-btn menu-only" type="button" aria-label="打开课程树">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+    <button id="backBtn" class="btn small" type="button">← 返回</button>
+    <div class="title" id="courseTitle"></div>
+    <div class="course-nav">
+      <button id="prevBtn" class="btn small" type="button">← 上一课</button>
+      <button id="nextBtn" class="btn small" type="button">下一课 →</button>
+      <button id="fsBtn" class="icon-btn" type="button" title="全屏" aria-label="全屏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="course-body">
+    <aside class="sidebar" id="sidebar">
+      <div id="tree"></div>
+    </aside>
+    <div id="stage">
+      <iframe id="view" title="课件" referrerpolicy="no-referrer"></iframe>
+      <div id="stageEmpty" class="stage-empty" hidden>还没有可见的课件</div>
+    </div>
+  </div>
+</div>
+
+<div id="backdrop" class="backdrop"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
